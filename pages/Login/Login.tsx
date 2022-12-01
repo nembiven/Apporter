@@ -6,6 +6,7 @@ export interface LoginInterface {}
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import { initializeApp } from 'firebase/app';
 import {firebaseConfig} from '../../services/Firebase/Firebase'
+import { useNavigation } from '@react-navigation/core';
 
 
 
@@ -16,7 +17,11 @@ function Login (){
 	const [password, setPassword] = React.useState('')
 	const app = initializeApp(firebaseConfig)
 	const auth = getAuth(app)
+	const navigation = useNavigation()
 
+	const movetoApp = () =>{
+		navigation.navigate('Navigation')
+	}
 	const handleCreateAccount = ()=>{
 		createUserWithEmailAndPassword(auth,email,password)
 		.then((userCredential )=>{
@@ -77,10 +82,10 @@ function Login (){
 						<Text style={styles.text}>Iniciar Sesión Usuario</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
-						onPress={handleSignIn}
+						onPress={movetoApp}
 						style={styles.button}
 						activeOpacity={1}>
-						<Text style={styles.text}>Iniciar Sesión C</Text>
+						<Text style={styles.text}>Entrar app</Text>
 					</TouchableOpacity>
         		</View>
 				

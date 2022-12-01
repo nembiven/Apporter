@@ -6,12 +6,11 @@ import { NavigationContainer } from '@react-navigation/native';
 //Pages
 import { MainView, Menu} from '../../pages';
 
-
 export interface NavigationInterface {}
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs(){
+function Navbar(){
 	return (
 		<Tab.Navigator
 			initialRouteName="MainView"
@@ -21,9 +20,7 @@ function MyTabs(){
 				component={MainView}
 				options={{
 					tabBarLabel: 'Mapa',
-					// tabBarIcon: ({ color, size}) =>(
-						
-					// ),
+					// tabBarIcon: ({ color, size}) =>(),
 					headerShown : false,
 				}}
 				/>
@@ -33,7 +30,7 @@ function MyTabs(){
 				options={{
 					tabBarLabel:'Mas',
 					// tabBarIcon
-					headerShown:false,
+					headerShown:true,
 				}}
 				/>
 		</Tab.Navigator>
@@ -41,9 +38,7 @@ function MyTabs(){
 }
 const Navigation : React.FC<NavigationInterface> = () => {
 	return <>
-		<NavigationContainer> 
-			<MyTabs/>
-		</NavigationContainer>
+			<Navbar/>
 	</>
 };
 
