@@ -41,7 +41,7 @@ function MyTabs(){
 }
 const Navigation : React.FC<NavigationInterface> = () => {
 	return <>
-		<NavigationContainer>
+		<NavigationContainer> 
 			<MyTabs/>
 		</NavigationContainer>
 	</>

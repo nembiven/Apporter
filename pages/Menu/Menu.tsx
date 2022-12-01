@@ -1,13 +1,13 @@
 import React from 'react';
 import { Ads } from '../../components';
-import { Navbar, TopBarNavigator } from '../../navigators';
+import {Text} from 'react-native'
 export interface MenuInterface {}
 
 const Menu : React.FC<MenuInterface> = () => {
 	return <>
-	<TopBarNavigator/>
+		<Text>Menu</Text>
 	<Ads/>
-	<Navbar/>
+
 	</>;
 };
 
