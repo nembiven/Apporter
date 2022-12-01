@@ -1,8 +1,8 @@
 import React from 'react';
-export interface RegisterFundationInterface {}
+export interface RegisterInterface {}
 
-const RegisterFundation : React.FC<RegisterFundationInterface> = () => {
-	return <div>RegisterFundation</div>;
+const Register : React.FC<RegisterInterface> = () => {
+	return <div>Register</div>;
 };
 
-export default RegisterFundation;
+export default Register;
