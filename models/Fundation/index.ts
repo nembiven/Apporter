@@ -1,1 +1,0 @@
-export { default as Fundation } from './Fundation';

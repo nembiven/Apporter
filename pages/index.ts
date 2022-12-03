@@ -5,5 +5,5 @@ export * from './Login';
 export * from './MainView';
 export * from './Menu';
 export * from './Profile';
-export * from './Publish';
+export * from './Publications';
 export * from './Register';

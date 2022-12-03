@@ -5,7 +5,7 @@ import {BlurView} from 'expo-blur'
 export interface LoginInterface {}
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import { initializeApp } from 'firebase/app';
-import {firebaseConfig} from '../../services/Firebase/Firebase'
+import {app} from '../../services/Firebase/Firebase'
 import { useNavigation } from '@react-navigation/core';
 
 
@@ -15,7 +15,6 @@ import { useNavigation } from '@react-navigation/core';
 function Login (){
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
-	const app = initializeApp(firebaseConfig)
 	const auth = getAuth(app)
 	const navigation = useNavigation()
 
