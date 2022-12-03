@@ -1,12 +1,9 @@
-import React from 'react';
-export interface FirebaseInterface {}
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-export const firebaseConfig = {
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, getDocs , onSnapshot, doc} from 'firebase/firestore';
+
+
+const firebaseConfig = {
   apiKey: "AIzaSyCCZwAuzK1uDiqVxtzY890E7fmUMUD-mAg",
   authDomain: "apporter-2238c.firebaseapp.com",
   projectId: "apporter-2238c",
@@ -17,3 +14,6 @@ export const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(initializeApp(firebaseConfig));
+
+export{app,db,getFirestore,collection,addDoc, getDocs, onSnapshot, doc};
