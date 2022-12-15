@@ -11,11 +11,6 @@ const iniLatLng = {
 	longitude: -70.6054836,
   }
 
- const marker = {
-	latitude: -33.5875851,
-	longitude: -70.6054836,
-  }
-
 const Map : React.FC<MapInterface> = () => {
 	
 	const state = {
@@ -25,13 +20,15 @@ const Map : React.FC<MapInterface> = () => {
 			latitude: -33.5875851,
 			longitude: -70.6054836
 		  },
+		  description:'hola',
 		},
 		{
 		  title: 'hello2',
 		  coordinates: {
 			latitude: -33.5858984,
 			longitude: -70.601538
-		  },  
+		  },
+		  description:'hola2',
 		}]
 	  }
 	
@@ -46,16 +43,13 @@ const Map : React.FC<MapInterface> = () => {
     }}
 	showsUserLocation={true}
 	zoomEnabled={true}
-	
 	>
-
-
 	{state.markers.map(marker => (
     <Marker 
       coordinate={marker.coordinates}
       title={marker.title}
-    />
-  ))}
+	  description={marker.description}
+    />))}
 	</MapView>
     </View>
 	</>
