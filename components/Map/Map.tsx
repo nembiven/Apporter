@@ -21,6 +21,7 @@ const Map : React.FC<MapInterface> = () => {
 const styles = StyleSheet.create({
 	container: {
 	  flex: 1,
+	  maxHeight: '75%',
 	},
 	map: {
 	  width: '100%',

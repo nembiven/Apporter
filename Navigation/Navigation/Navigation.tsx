@@ -12,6 +12,9 @@ const Tab = createBottomTabNavigator();
 
 function Navbar(){
 	return (
+
+
+		
 		<Tab.Navigator
 			initialRouteName="MainView"
 		>
@@ -34,6 +37,7 @@ function Navbar(){
 				}}
 				/>
 		</Tab.Navigator>
+ 
 	)
 }
 const Navigation : React.FC<NavigationInterface> = () => {
