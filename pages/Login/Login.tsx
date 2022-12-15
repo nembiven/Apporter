@@ -17,15 +17,8 @@ function Login (){
 	const movetoApp = () =>{
 		navigation.navigate('Navigation')
 	}
-	const handleCreateAccount = ()=>{
-		createUserWithEmailAndPassword(auth,email,password)
-		.then((userCredential )=>{
-			console.log("Account created!")
-			const user = userCredential.user;
-		})
-		.catch(error =>{
-			Alert.alert(error.message)
-		})
+	const movetoRegister = () =>{
+		navigation.navigate('Register')
 	}
 	const handleSignIn = () =>{
 		signInWithEmailAndPassword(auth,email,password)
@@ -80,7 +73,7 @@ function Login (){
 		</BlurView>
 		{/* SignUp buttons */}
 		<View>
-			<TouchableOpacity onPress={handleCreateAccount} style={{top:-10}}>
+			<TouchableOpacity onPress={movetoRegister} style={{top:-10}}>
 				<Text style={styles.textdetails}>¿No tienes cuenta? Registrate</Text>
 			</TouchableOpacity>
 			{/* <TouchableOpacity style={styles.buttonSign} activeOpacity={1}>
