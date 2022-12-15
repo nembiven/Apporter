@@ -26,9 +26,6 @@ function Login (){
 		.then((userCredential )=>{
 			console.log("Account created!")
 			const user = userCredential.user;
-			
-			
-			
 		})
 		.catch(error =>{
 			Alert.alert(error.message)
