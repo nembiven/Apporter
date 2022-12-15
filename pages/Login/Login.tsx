@@ -8,10 +8,6 @@ import { initializeApp } from 'firebase/app';
 import {app} from '../../services/Firebase/Firebase'
 import { useNavigation } from '@react-navigation/core';
 
-
-
-
-
 function Login (){
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
@@ -21,15 +17,8 @@ function Login (){
 	const movetoApp = () =>{
 		navigation.navigate('Navigation')
 	}
-	const handleCreateAccount = ()=>{
-		createUserWithEmailAndPassword(auth,email,password)
-		.then((userCredential )=>{
-			console.log("Account created!")
-			const user = userCredential.user;
-		})
-		.catch(error =>{
-			Alert.alert(error.message)
-		})
+	const movetoRegister = () =>{
+		navigation.navigate('Register')
 	}
 	const handleSignIn = () =>{
 		signInWithEmailAndPassword(auth,email,password)
@@ -45,56 +34,51 @@ function Login (){
 	return (
 	<>
 	<View style={styles.containerMain}>
-		{/* Background */}
-		<Image style={[styles.Wallpaper,StyleSheet.absoluteFill]}/>
 		{/* Containter Login */}
 		<BlurView intensity={100}>
 			<View style={styles.Login}>
 				{/* Logo app */}
 				<View style={styles.containerlogo}>
-        			<Image source={require('../../assets/logo.png')} style={styles.imagelogo} />
-        			<Text style={styles.textlogo}>APPORTER</Text>
+        			<Image source={require('../../assets/1logo.png')} style={styles.imagelogo} />
+        			<Text style={styles.textlogo}>Bienvenido a APPORTER</Text>
       			</View>
-				{/* Input User */}
+				{/* Ingreso usuario*/}
 				<View>
-					<Image source={require('../../assets/username.png')} style={styles.inlineImg} />
-					<TextInput onChangeText={(text)=> setEmail(text)} style={styles.input} placeholder="Usuario"/>
+					<TextInput onChangeText={(text)=> setEmail(text)} style={styles.label} placeholder="Correo"/>
 				</View>
-				{/* Input Password */}
+				{/* Ingreso contraseña*/}
 				<View>
-					<Image source={require('../../assets/password.png')} style={styles.inlineImg} />
-					<TextInput secureTextEntry={true} onChangeText={(text)=> setPassword(text)} style={styles.input} placeholder="Contraseña"/>
+					<TextInput secureTextEntry={true} onChangeText={(text)=> setPassword(text)} style={styles.label} placeholder="Contraseña"/>
 				</View>
-				{/* Forgot Password */}
-				<TouchableOpacity style={{top:-10}} activeOpacity={1}>
-				<Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
-			</TouchableOpacity>
+				{/* Recuperar contraseña */}
+				<TouchableOpacity style={{top:-10}}>
+					<Text style={styles.textdetails}>¿Olvidaste tu contraseña?</Text>
+				</TouchableOpacity>
 				{/* Submit Button */}
-				<View style={styles.containerS}>		
+				<View>		
 					<TouchableOpacity
 						onPress={handleSignIn}
 						style={styles.button}
 						activeOpacity={1}>
-						<Text style={styles.text}>Iniciar Sesión Usuario</Text>
+						<Text style={styles.textButton}>Iniciar Sesión Usuario</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						onPress={movetoApp}
 						style={styles.button}
 						activeOpacity={1}>
-						<Text style={styles.text}>Entrar app</Text>
+						<Text style={styles.textButton}>Entrar app</Text>
 					</TouchableOpacity>
         		</View>
-				
 			</View>
 		</BlurView>
 		{/* SignUp buttons */}
-		<View style={styles.containerS}>
-			<TouchableOpacity onPress={handleCreateAccount} style={styles.buttonSign} activeOpacity={1}>
-				<Text style={styles.text}>Crear cuenta</Text>
+		<View>
+			<TouchableOpacity onPress={movetoRegister} style={{top:-10}}>
+				<Text style={styles.textdetails}>¿No tienes cuenta? Registrate</Text>
 			</TouchableOpacity>
-			<TouchableOpacity style={styles.buttonSign} activeOpacity={1}>
+			{/* <TouchableOpacity style={styles.buttonSign} activeOpacity={1}>
 				<Text style={styles.text}>Continuar con Google</Text>
-			</TouchableOpacity>
+			</TouchableOpacity> */}
       	</View>
 	</View>
 	
@@ -104,94 +88,80 @@ function Login (){
 const styles = StyleSheet.create({
 	containerMain:{
 		flex: 1,
-		backgroundColor:'#fff',
+		backgroundColor:'#FFF3EB',
 		alignItems : 'center',
 		justifyContent : 'center',
 	},
-	Wallpaper:{ //Background
-		width:'100%',
-		height:'100%',
-		resizeMode :'cover',
-		background: '#FFF3EB'
-	},
-	Login:{
+	Login:{ //container login
 		width:350,
 		height:500,
-		borderColor:'#fff',
-		borderWidth:2,
-		borderRadius:10,
 		padding:10,
 		alignItems: 'center',
+		backgroundColor:'#FFF3EB',
 	},
-	input :{
-		backgroundColor: 'rgba(255, 255, 255, 0.4)',
-		width: 300,
-		height: 40,
-		borderColor :'black',
-		borderWidth :3,
-		marginHorizontal: 20,
-		paddingLeft: 45,
-		borderRadius: 20,
-		marginBottom: 20,
+	label:{ //Label de input
+    	alignContent: 'center',
+    	justifyContent: 'center',
+		backgroundColor: '#FFF3EB',
+		position: 'relative',
+		width: 350,
+		height: 50,
+		borderColor: '#0B87BA',
+		borderStyle: 'solid',
+		borderWidth: 2,
+		borderRadius: 10,
+		color: '#333333',
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10
+	},
+	textdetails:{ //Texto pequeño
+		color: '#4D4D4D',
+		backgroundColor: 'transparent',
+		fontSize: 12,
+		textAlign: 'center',
+		margin: 10
+	},
+	textButton:{
+		color: '#FFF3EB',
+		backgroundColor: 'transparent',
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+	},
+	button: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#0B87BA',
+		height: 50,
+		width: 200,
+		borderRadius: 15,
+		margin: 10,
+	},
+	containerlogo: {
+		// flex: 3,
+		alignItems: 'center',
+		justifyContent: 'center', 
+	},
+	imagelogo: {
+		width: 100,
+		height: 102,
+	},
+	textlogo: {
+		color: '#333333',
+		backgroundColor: 'transparent',
+		margin: 20,
+		fontSize: 20,
 	},
 
-	inputWrapper: {
-		flex: 1,
-	},
-	inlineImg: {
-		position: 'absolute',
-		zIndex: 99,
-		width: 22,
-		height: 22,
-		left: 35,
-		top: 9,
-	  },
-	  button: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#fff',
-		height: 50,
-		width:150,
-		borderRadius: 20,
-	  },
-	  buttonSign: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#fff',
-		height: 50,
-		width:150,
-		borderRadius: 5,
-	  },
-	text: {
-		color: 'white',
-		backgroundColor: 'transparent',
-	  },
-	containerlogo: {
-		flex: 3,
-		alignItems: 'center',
-		justifyContent: 'center',
-	  },
-	imagelogo: {
-		width: 140,
-		height: 140,
-	  },
-	textlogo: {
-		color: 'white',
-		fontWeight: 'bold',
-		backgroundColor: 'transparent',
-		marginTop: 20,
-		fontSize: 40,
-	  },
-	  containerS: {
-		top:50,
-    	width: '100%',
-    	flexDirection: 'row',
-    	justifyContent: 'space-around',
-	  },
-	  texts: {
-		color: 'white',
-		backgroundColor: 'transparent',
-	  },
+	// inlineImg: {
+	// 	position: 'absolute',
+	// 	zIndex: 99,
+	// 	width: 22,
+	// 	height: 22,
+	// 	left: 35,
+	// 	top: 9,
+	// },
 });
 
 export default Login;
