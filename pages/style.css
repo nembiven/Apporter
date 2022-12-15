@@ -1,0 +1,66 @@
+.label{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 270px;
+    height: 50px;
+    left: 51px;
+    top: 221px;
+
+    background: #FFF3EB;
+    border: 2px solid #0B87BA;
+    border-radius: 10px;
+}
+.containerMain{
+    flex: 1;
+    background: #FFF3EB;
+}
+.Login{
+    width:350;
+    height:500;
+}
+.input{
+    background: #FFF3EB;
+}
+.inputWrapper{
+    flex: 1;
+}
+.inlineImg{
+    position: 'absolute';
+}
+.button{
+    background: #fff;
+    height: 50;
+    width:150;
+}
+.buttonSign{
+    background: #fff;
+    height: 50;
+    width:150;
+}
+.text{
+    background: transparent;
+}
+.containerlogo{
+    flex: 3;
+}
+.imagelogo{
+    width: 140;
+    height: 140;
+}
+.textlogo{
+    color: white;
+    font-weight: bold;
+    background: transparent;
+    font-size: 40;
+}
+.containerS{
+    top:50;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.texts{
+    color: white;
+    background: transparent;
+}

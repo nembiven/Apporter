@@ -8,7 +8,6 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splasho.png",
-      "resizeMode": "center",
       "backgroundColor": "#ffffff"
     },
     "updates": {
