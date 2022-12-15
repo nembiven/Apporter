@@ -7,7 +7,7 @@ export interface ProfileInterface {}
 
 
 const Profile : React.FC<ProfileInterface> = () => {
-
+	console.log("Hola soy profile")
 	const [title, setTitle] = useState("");
 
 	const addPublish = async () =>{

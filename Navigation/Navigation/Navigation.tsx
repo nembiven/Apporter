@@ -37,6 +37,7 @@ function Navbar(){
 	)
 }
 const Navigation : React.FC<NavigationInterface> = () => {
+	
 	return <>
 			<Navbar/>
 	</>

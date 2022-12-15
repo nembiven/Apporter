@@ -5,7 +5,7 @@ export declare global{
             Register:undefined;
             ForgotPassword : undefined;
             Navigation : undefined;
-
+            Details: undefined;
         }
 
     }

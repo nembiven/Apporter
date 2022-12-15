@@ -1,6 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, getDocs , onSnapshot, doc} from 'firebase/firestore';
+import {onValue,ref} from 'firebase/database'
 
 
 const firebaseConfig = {
@@ -16,4 +17,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(initializeApp(firebaseConfig));
 
-export{app,db,getFirestore,collection,addDoc, getDocs, onSnapshot, doc};
+export{app,db,getFirestore,collection,addDoc, getDocs, onSnapshot, doc, onValue, ref};
