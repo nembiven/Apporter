@@ -1,20 +1,62 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 
 export interface MapInterface {}
 
+
+const iniLatLng = {
+	latitude: -33.5875851,
+	longitude: -70.6054836,
+  }
+
+ const marker = {
+	latitude: -33.5875851,
+	longitude: -70.6054836,
+  }
+
 const Map : React.FC<MapInterface> = () => {
+	
+	const state = {
+		markers: [{
+		  title: 'hello',
+		  coordinates: {
+			latitude: -33.5875851,
+			longitude: -70.6054836
+		  },
+		},
+		{
+		  title: 'hello2',
+		  coordinates: {
+			latitude: -33.5858984,
+			longitude: -70.601538
+		  },  
+		}]
+	  }
+	
 	return <>
 	  <View style={styles.container}>
       <MapView style={styles.map} 
 	  initialRegion={{
-      latitude: -33.4555447,
-      longitude: -70.642035,
+      latitude: iniLatLng.latitude,
+      longitude: iniLatLng.longitude,
       latitudeDelta: 0.01,
       longitudeDelta: 0.01,
-    }} />
+    }}
+	showsUserLocation={true}
+	zoomEnabled={true}
+	
+	>
+
+
+	{state.markers.map(marker => (
+    <Marker 
+      coordinate={marker.coordinates}
+      title={marker.title}
+    />
+  ))}
+	</MapView>
     </View>
 	</>
 };
