@@ -3,9 +3,10 @@
 import React, { useEffect , useState} from 'react';
 import { ActivityIndicator, Button, Pressable, Text, View, Image, TouchableOpacity , StyleSheet} from 'react-native';
 import { db,collection, getDocs, onSnapshot, getFirestore, ref, doc} from '../../services/Firebase/Firebase';
+import { query, where } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/core';
 import { FlatList } from 'react-native-gesture-handler';
-import { query, where } from 'firebase/firestore';
+
 
 
 export interface PublicationListInterface {}
@@ -46,7 +47,10 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 	const [loading, setLoading] = useState(false);
 	const [publishList, setPublishList] = useState([] as any[]);
 	const [filterList,setFilterList] = useState(1);
-	
+	//Futuro uso context
+	// const {ListaPublicaciones} = useContext(PublContext)
+	////////////////////////////////
+
 	const getPublishList = async (filters:any) =>{
 		console.log('Filtros: ',filters)
 		const q = query(collection(db, "publish"));
