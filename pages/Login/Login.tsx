@@ -26,9 +26,6 @@ function Login (){
 		.then((userCredential )=>{
 			console.log("Account created!")
 			const user = userCredential.user;
-			
-			
-			
 		})
 		.catch(error =>{
 			Alert.alert(error.message)
@@ -48,8 +45,8 @@ function Login (){
 	return (
 	<>
 	<View style={styles.containerMain}>
-		{/* Wallpaper */}
-		<Image source={require('../../assets/wallpaper.png')} style={[styles.Wallpaper,StyleSheet.absoluteFill]}/>
+		{/* Background */}
+		<Image style={[styles.Wallpaper,StyleSheet.absoluteFill]}/>
 		{/* Containter Login */}
 		<BlurView intensity={100}>
 			<View style={styles.Login}>
@@ -111,10 +108,11 @@ const styles = StyleSheet.create({
 		alignItems : 'center',
 		justifyContent : 'center',
 	},
-	Wallpaper:{
+	Wallpaper:{ //Background
 		width:'100%',
 		height:'100%',
 		resizeMode :'cover',
+		background: '#FFF3EB'
 	},
 	Login:{
 		width:350,
