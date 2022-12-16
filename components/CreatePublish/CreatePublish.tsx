@@ -1,20 +1,20 @@
 import React from 'react';
-import { Text, SafeAreaView, View, Pressable,TextInput, Button, Alert, StyleSheet, ScrollView  } from 'react-native';
-import { useEffect, useState } from 'react';
-import {addDoc,getDocs,collection, getFirestore } from 'firebase/firestore';
-import {Publish} from '../../models';
+import { Text, SafeAreaView, View, TextInput, Button, StyleSheet, ScrollView  } from 'react-native';
+import {  useState } from 'react';
+import {addDoc,collection, getFirestore } from 'firebase/firestore';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 export interface CreatePublishInterface {}
 
 const CreatePublish : React.FC<CreatePublishInterface> = () => {
-	console.log("Hola soy profile")
 	const [title, setTitle] = useState("");
 	const [description, setdescription] = useState("");
 	const [lat, setlat] = useState("");
 	const [long, setlong] = useState("");
 	const [label, setlabel] = useState("");
+  const [adress, setadress] = useState("");
 
 	const addPublish = async () =>{
-        try{console.log("hola1111111111")
+        try{
             const docRef = await addDoc(collection(getFirestore(),'publish'),{
                 title: title,
 				description:description,
@@ -31,7 +31,9 @@ const CreatePublish : React.FC<CreatePublishInterface> = () => {
     }
 	return <>
 	<SafeAreaView>
-	<ScrollView><View style={styles.title}>
+
+  
+    <View style={styles.title}>
       <Text>Título:</Text>
       <TextInput
         placeholder=' Enter titulo'
@@ -53,26 +55,6 @@ const CreatePublish : React.FC<CreatePublishInterface> = () => {
         }}
         onChangeText = {(text) => setdescription(text)}
       />
-	  	  <Text>Latitud:</Text>
-      <TextInput
-		placeholder=' Enter latitud'
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        onChangeText = {(text) => setlat(text)}
-      />
-	  	  <Text>Longitud:</Text>
-      <TextInput
-		placeholder=' Enter longitud'
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        onChangeText = {(text) => setlong(text)}
-      />
 		<Text>Etiqueta:</Text>
       <TextInput
 	  placeholder=' Enter etiqueta'
@@ -83,19 +65,43 @@ const CreatePublish : React.FC<CreatePublishInterface> = () => {
         }}
         onChangeText = {(text) => setlabel(text)}
       />
-
+    
     </View>
-
+    
+        
 	<View style={styles.fixToText}>
-
+<GooglePlacesAutocomplete
+    placeholder='Dirección'
+    fetchDetails
+    GooglePlacesDetailsQuery={{ fields: 'geometry', }}
+    onPress={(data: any, details: any = null) => {
+      setadress(data.description)
+      setlat(details.geometry.location.lat)
+      setlong(details.geometry.location.lng)
+    }}
+    query={{
+      key:'AIzaSyDLxXazrr1YQSQCXOx5vRCMbYBkq3lY4uo',
+      language:'es',
+      components : 'country:chl'
+    }}
+    styles={{
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 1
+    }}
+  />
 	<Button 
           title="Publicar"
           onPress={() => addPublish()}
         />
-
+  
 	</View>
-	</ScrollView>
+  <View>
+  <Text>Latitud : {lat}, Longitud {long}</Text>
+  </View>
+
 	</SafeAreaView>
+
 	</>
 };
 

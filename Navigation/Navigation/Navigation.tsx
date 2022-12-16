@@ -1,10 +1,9 @@
 import React from 'react';
-import { Tabs } from 'react-native-router-flux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { PubliContextProvider } from '../../context/PublContext';
 //Pages
-import { MainView, Menu} from '../../pages';
+import { MainView} from '../../pages';
+import { Menu } from '../Menu';
 
 export interface NavigationInterface {}
 

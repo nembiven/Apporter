@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { Publish } from "./types";
+import { Publish } from "../models";
 const Context = createContext({});
 
 interface Props {

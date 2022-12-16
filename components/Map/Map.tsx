@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Alert, Button, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { PublishContextType } from '../../context/types';
-import PublicationContext from "../../context/PublContext";
-import * as Location from 'expo-location';
+import PublicationContext from "../../context/PublContext"
 
 export interface MapInterface {}
 
@@ -61,7 +60,7 @@ const Map : React.FC<MapInterface> = () => {
 	function Markers (){
 		GetLocation()
 		const markersx = [] as Array<any>
-		PublicationsContext.forEach(element => {
+		PublicationsContext.forEach(element  => {
 			
 			const mark = {
 				title : element.title,
