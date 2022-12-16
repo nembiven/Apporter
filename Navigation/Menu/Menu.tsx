@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator();
 				initialRouteName="Cerca"
 			>		
 				<Tab.Screen name="Cerca" component={Publications}/>
-				<Tab.Screen name="Perfil" component={Profile}/>
+				<Tab.Screen name="Publicaciones" component={Profile}/>
 				
 			</Tab.Navigator>
 
