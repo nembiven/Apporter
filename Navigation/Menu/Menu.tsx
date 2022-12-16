@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
-import { Ads } from '../../components';
-import {BackHandler, Text} from 'react-native'
+import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { Filters,Publications,Profile, Details } from '../../pages';
+import {Publications,Profile } from '../../pages';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
@@ -19,12 +16,9 @@ const Stack = createNativeStackNavigator();
 	return <>
 
 			<Tab.Navigator 
-				initialRouteName="Filtros"
-			>
-				<Tab.Screen name="Filtros" component={Filters} />
-					
+				initialRouteName="Cerca"
+			>		
 				<Tab.Screen name="Cerca" component={Publications}/>
-				
 				<Tab.Screen name="Perfil" component={Profile}/>
 				
 			</Tab.Navigator>

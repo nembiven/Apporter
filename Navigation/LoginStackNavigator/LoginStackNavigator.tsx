@@ -4,6 +4,7 @@ import {createSwitchNavigator, createAppContainer } from 'react-navigation'
 import React from 'react';
 import { Details, ForgotPassword, Login, Register } from '../../pages';
 import { Navigation } from '../Navigation';
+import { CreatePublish } from '../../components/CreatePublish';
 export interface LoginStackNavigatorInterface {}
 
 const LoginStackNavigator : React.FC<LoginStackNavigatorInterface> = () => {
@@ -25,6 +26,7 @@ const LoginStackNavigator : React.FC<LoginStackNavigatorInterface> = () => {
 					headerShown : false,
 				}}/>
 			<Stack.Screen name="Details" component={Details} />
+			<Stack.Screen name="CreatePublish" component={CreatePublish} />
        </Stack.Navigator>
 </NavigationContainer>
 		</>

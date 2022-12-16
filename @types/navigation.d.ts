@@ -6,6 +6,7 @@ export declare global{
             ForgotPassword : undefined;
             Navigation : undefined;
             Details: undefined;
+            CreatePublish:undefined;
         }
 
     }
