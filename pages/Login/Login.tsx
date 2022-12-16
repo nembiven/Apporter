@@ -42,19 +42,19 @@ function Login (){
         			<Image source={require('../../assets/1logo.png')} style={styles.imagelogo} />
         			<Text style={styles.textlogo}>Bienvenido a APPORTER</Text>
       			</View>
-				{/* Ingreso usuario*/}
+				{/*Ingreso usuario*/}
 				<View>
 					<TextInput onChangeText={(text)=> setEmail(text)} style={styles.label} placeholder="Correo"/>
 				</View>
-				{/* Ingreso contraseña*/}
+				{/*Ingreso contraseña*/}
 				<View>
 					<TextInput secureTextEntry={true} onChangeText={(text)=> setPassword(text)} style={styles.label} placeholder="Contraseña"/>
 				</View>
-				{/* Recuperar contraseña */}
+				{/*Recuperar contraseña*/}
 				<TouchableOpacity style={{top:-10}}>
 					<Text style={styles.textdetails}>¿Olvidaste tu contraseña?</Text>
 				</TouchableOpacity>
-				{/* Submit Button */}
+				{/*Submit Button*/}
 				<View>		
 					<TouchableOpacity
 						onPress={handleSignIn}
@@ -71,7 +71,7 @@ function Login (){
         		</View>
 			</View>
 		</BlurView>
-		{/* SignUp buttons */}
+		{/*SignUp buttons*/}
 		<View>
 			<TouchableOpacity onPress={movetoRegister} style={{top:-10}}>
 				<Text style={styles.textdetails}>¿No tienes cuenta? Registrate</Text>
