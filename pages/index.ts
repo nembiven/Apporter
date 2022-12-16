@@ -1,5 +1,4 @@
 export * from './Details';
-export * from './Filters';
 export * from './ForgotPassword';
 export * from './Login';
 export * from './MainView';
