@@ -7,6 +7,9 @@ export interface Publish {
     userid:string,
     username:string,
     label: string,
+    phone:string,
+    mail:string,
+    adress:string,
     
 }
 

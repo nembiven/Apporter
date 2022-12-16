@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { PublishContextType } from '../../context/types';
+import { PublishContextType } from '../../models';
 import PublicationContext from "../../context/PublContext"
 
 export interface MapInterface {}
@@ -26,7 +26,7 @@ const Map : React.FC<MapInterface> = () => {
 
 	function Markers (){
 		const markersx = [] as Array<any>
-		PublicationsContext.forEach(element => {
+		PublicationsContext.forEach(element  => {
 			
 			const mark = {
 				title : element.title,

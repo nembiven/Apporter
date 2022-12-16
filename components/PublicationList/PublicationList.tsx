@@ -54,6 +54,9 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 				userid: doc.data().userid,
 				username : doc.data().username,
 				label : doc.data().label,
+				phone : doc.data().phone,
+				mail : doc.data().mail,
+				adress: doc.data().adress,
 				
 			}
 

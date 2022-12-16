@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, Image, TextInput,Animated,TouchableOpacity , Al
 import {BlurView} from 'expo-blur'
 export interface LoginInterface {}
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
-import { initializeApp } from 'firebase/app';
 import {app} from '../../services/Firebase/Firebase'
 import { useNavigation } from '@react-navigation/core';
 
@@ -20,11 +19,15 @@ function Login (){
 	const movetoRegister = () =>{
 		navigation.navigate('Register')
 	}
+	const F =() =>{
+		Alert.alert('F :(')
+	}
 	const handleSignIn = () =>{
 		signInWithEmailAndPassword(auth,email,password)
 		.then((userCredential)=>{
 			console.log('Signed in!')
 			const user = userCredential.user;
+			navigation.navigate('Navigation')
 		})
 		.catch(error =>{
 			
@@ -51,7 +54,7 @@ function Login (){
 					<TextInput secureTextEntry={true} onChangeText={(text)=> setPassword(text)} style={styles.label} placeholder="Contraseña"/>
 				</View>
 				{/*Recuperar contraseña*/}
-				<TouchableOpacity style={{top:-10}}>
+				<TouchableOpacity onPress={F} style={{top:-10}}>
 					<Text style={styles.textdetails}>¿Olvidaste tu contraseña?</Text>
 				</TouchableOpacity>
 				{/*Submit Button*/}
