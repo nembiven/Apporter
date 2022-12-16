@@ -9,8 +9,8 @@ interface Props {
 
 export function PubliContextProvider({children}: Props){
 
-    const [PublicationsContext,setPublicationsContext] = useState<Array<Publish>>([]);
-    return  <Context.Provider value={{PublicationsContext, setPublicationsContext}}>{children}</Context.Provider>
+    const [LabelContext,setLabelContext] = useState([]);
+    return  <Context.Provider value={{LabelContext, setLabelContext}}>{children}</Context.Provider>
     
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler,View,StyleSheet} from 'react-native';
 
 import { Ads, Map } from '../../components';
 import { PublicationList } from '../../components/PublicationList';
@@ -13,10 +13,17 @@ const MainView : React.FC<MainViewInterface> = () => {
 	return <>
 		<Map/>
 		{/* <Ads/> */}
-		<PublicationList/>
+		<View style={styles.containerMap}>
+			<PublicationList/>
+		</View>
+		
 
 	</>
 	;
 };
-
+const styles = StyleSheet.create({
+	containerMap:{
+		maxHeight:"25%",
+	}
+  });
 export default MainView;

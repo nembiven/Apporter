@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs } from 'react-native-router-flux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { PubliContextProvider } from '../../context/PublContext';
 //Pages
 import { MainView, Menu} from '../../pages';
 
@@ -12,7 +12,8 @@ const Tab = createBottomTabNavigator();
 
 function Navbar(){
 	return (
-		<Tab.Navigator
+		<PubliContextProvider>
+			<Tab.Navigator
 			initialRouteName="MainView"
 		>
 			<Tab.Screen 
@@ -33,7 +34,9 @@ function Navbar(){
 					headerShown:true,
 				}}
 				/>
-		</Tab.Navigator>
+			</Tab.Navigator>
+		</PubliContextProvider>
+		
 	)
 }
 const Navigation : React.FC<NavigationInterface> = () => {

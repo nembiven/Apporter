@@ -1,12 +1,13 @@
 
 
-import React, { useEffect , useState} from 'react';
-import { ActivityIndicator, Button, Pressable, Text, View, Image, TouchableOpacity , StyleSheet} from 'react-native';
-import { db,collection, getDocs, onSnapshot, getFirestore, ref, doc} from '../../services/Firebase/Firebase';
-import { query, where } from 'firebase/firestore';
+import React, { useContext, useEffect , useState} from 'react';
+import { ActivityIndicator,Text, View, Image, TouchableOpacity , StyleSheet} from 'react-native';
+import { db,collection, getDocs, onSnapshot} from '../../services/Firebase/Firebase';
+import { query} from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/core';
 import { FlatList } from 'react-native-gesture-handler';
-
+import PublicationContext from "../../context/PublContext"
+import { Publish,PublishContextType } from '../../models';
 
 
 export interface PublicationListInterface {}
@@ -14,7 +15,6 @@ export interface PublicationListInterface {}
 const PublicationList : React.FC<PublicationListInterface> = () => {
 	const navigation = useNavigation()
 	const PublicationsCard = (props:any) => { //Aqui se arregla el contenido de la lista de publicaciones
-		console.log(props)
 		return (
 			<TouchableOpacity
 				  onPress={() =>
@@ -31,47 +31,41 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 	
 			  <Text style={styles.mainHeader}>{props.title}</Text>
 			  <Text style={styles.description}>*{props.description}</Text>
-			  <View >
-				
-				
-			  </View>
 			</View>
 		  </View>
 		  </TouchableOpacity>
 		);
 	  };
 
-	  function Filtrar(data:any, filtros:[]){
-		return data.isActive;
-	  }
-	const [loading, setLoading] = useState(false);
-	const [publishList, setPublishList] = useState([] as any[]);
-	const [filterList,setFilterList] = useState(1);
-	//Futuro uso context
-	// const {ListaPublicaciones} = useContext(PublContext)
-	////////////////////////////////
+	const [loading, setLoading] = useState(true);
+	const {PublicationsContext,setPublicationsContext} = useContext(PublicationContext) as PublishContextType;
 
-	const getPublishList = async (filters:any) =>{
-		console.log('Filtros: ',filters)
+	const getPublishList = async () =>{
 		const q = query(collection(db, "publish"));
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  			const cities = [] as Array<any>;
+  			const publ = [] as Array<Publish>;
   			querySnapshot.forEach((doc) => {
-			if(Filtrar(doc.data(),filters)){
-				const data = doc.data()
-				data.id= doc.id;
-      			cities.push(data);
+			const Publi : Publish ={
+				id: doc.id,
+				title: doc.data().title,
+				description :  doc.data().description,
+				lat:doc.data().lat,
+				long:doc.data().long,
+				userid: doc.data().userid,
+				username : doc.data().username,
+				label : doc.data().label,
+				
 			}
-			else{
-				console.log(doc.data().isActive)
-			}
+
+      		publ.push(Publi);
 			
   			});
-			setPublishList(cities)
+			setPublicationsContext(publ)
+			setLoading(false)
 		});
 	}
 	useEffect(()=>{
-		getPublishList(filterList);
+		getPublishList()
 		
 	},[])
 
@@ -82,20 +76,20 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 			<ActivityIndicator/>
 		)
 	}
+	
 	return <>
-
-		<Text>Soy publish jeje</Text>
+	
 		{
-			publishList.length>0? 
+			PublicationsContext.length>0? 
 			(
 			<FlatList
-				data={publishList} 
-				renderItem={({item}) =><PublicationsCard title={item.title} isActive={item.isActive} id={item.id}/>} //Aqui se pasa la info hacia details
-				style={styles.mainContainer2}
+				data={PublicationsContext} 
+				renderItem={({item}) =><PublicationsCard title={item.title}  id={item.id} description={item.description} lat={item.lat} long={item.long}/>} //Aqui se pasa la info hacia details
+				style={styles.mainContainer}
 
 			/>)
 			:
-			(<Text>Nada que mostrar!</Text>)
+			(<Text>Nada que mostrar</Text>)
 		}
 		
 
@@ -108,13 +102,9 @@ const styles = StyleSheet.create({
 	  aspectRatio: 1,
 	},
 	mainContainer: {
-	  paddingHorizontal: 20,
+	  paddingHorizontal: 5,
 
 	},
-	mainContainer2: {
-
-		maxHeight:'25%'
-	  },
 	courseContainer: {
 	  padding: 20,
 	  backgroundColor: "rgba(255, 255, 255, 0.90)",
@@ -125,10 +115,10 @@ const styles = StyleSheet.create({
 	  shadowOpacity: 0.5,
 	  shadowRadius: 8,
 	  elevation: 8,
-	  marginVertical: 30,
+	  marginVertical: 10,
 	},
 	mainHeader: {
-	  fontSize: 22,
+	  fontSize: 18,
 	  color: "#344055",
 	  textTransform: "uppercase",
 	  // fontWeight: 500,
