@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { PubliContextProvider } from '../../context/PublContext';
 //Pages
 import { MainView, Menu} from '../../pages';
+import { ImageBackground, ImageComponent } from 'react-native';
 
 export interface NavigationInterface {}
 
@@ -13,9 +14,14 @@ const Tab = createBottomTabNavigator();
 function Navbar(){
 	return (
 		<PubliContextProvider>
-			<Tab.Navigator
-			initialRouteName="MainView"
-		>
+			<Tab.Navigator 
+				initialRouteName="MainView"
+				screenOptions={{
+					headerStyle: {backgroundColor: '#F3AE5F'},
+					tabBarStyle: {backgroundColor: '#F3AE5F'},
+					
+				}}
+			>
 			<Tab.Screen 
 				name="MainView" 
 				component={MainView}
