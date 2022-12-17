@@ -9,24 +9,19 @@ export interface LoginStackNavigatorInterface {}
 
 const LoginStackNavigator : React.FC<LoginStackNavigatorInterface> = () => {
 	const Stack = createNativeStackNavigator();
-	return (
-		
-		<>
+	return (<>
 		<NavigationContainer>
       		<Stack.Navigator>
-           		<Stack.Screen name="Login" component={Login} options={{
-					// tabBarIcon: ({ color, size}) =>(),
-					headerShown : false,
-				}}/>
-           <Stack.Screen name="Register" component={Register} />
-           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-           <Stack.Screen name="Navigation" component={Navigation} options={{
-					// tabBarIcon: ({ color, size}) =>(),
-					gestureEnabled: false,
-					headerShown : false,
-				}}/>
-			<Stack.Screen name="Details" component={Details} />
-			<Stack.Screen name="CreatePublish" component={CreatePublish} />
+           		<Stack.Screen name="Login" component={Login} options={{headerShown : false,}}/>
+				<Stack.Screen name="Register" component={Register} options={{headerShown : false,}}/>
+				<Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+				<Stack.Screen name="Navigation" component={Navigation} options={{
+							// tabBarIcon: ({ color, size}) =>(),
+							gestureEnabled: false,
+							headerShown : false,
+						}}/>
+				<Stack.Screen name="Details" component={Details} />
+				<Stack.Screen name="CreatePublish" component={CreatePublish} />
        </Stack.Navigator>
 </NavigationContainer>
 		</>

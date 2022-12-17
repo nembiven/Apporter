@@ -1,9 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Text, SafeAreaView, View, Pressable,TextInput, Button, Alert, StyleSheet, ScrollView  } from 'react-native';
-import { useEffect, useState } from 'react';
-import {addDoc,getDocs,collection, getFirestore } from 'firebase/firestore';
+import {useState } from 'react';
+import {addDoc,collection, getFirestore } from 'firebase/firestore';
 import {Publish} from '../../models';
+import {Profile} from '../../pages';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
+import { useNavigation } from '@react-navigation/core';
 export interface CreatePublishInterface {}
 
 const CreatePublish : React.FC<CreatePublishInterface> = () => {
@@ -17,14 +19,16 @@ const CreatePublish : React.FC<CreatePublishInterface> = () => {
 	const addPublish = async () =>{
         try{
             const docRef = await addDoc(collection(getFirestore(),'publish'),{
-                title: title,
-				description:description,
-				lat:Number(lat),
-				long:Number(long),
-				label:label,
-                isActive: true,
+              title: title,
+              description:description,
+              lat:Number(lat),
+              long:Number(long),
+              label:label,
+              isActive: true,
             })
-
+            const navigation = useNavigation()
+            navigation.navigate('Navigation')
+	
         }
         catch(e){
             console.error("ERROR ADDING DOCUMENT: ",e);

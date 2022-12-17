@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, SafeAreaView, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import {addDoc,getDocs,collection, getFirestore } from 'firebase/firestore';
+import { useNavigation } from '@react-navigation/core';
 
 export interface ProfileInterface {}
 
@@ -9,28 +10,12 @@ export interface ProfileInterface {}
 const Profile : React.FC<ProfileInterface> = () => {
 	console.log("Hola soy profile")
 
-	const [title, setTitle] = useState("");
-	const [description, setdescription] = useState("");
-	const [lat, setlat] = useState("");
-	const [long, setlong] = useState("");
-	const [label, setlabel] = useState("");
+	const navigation = useNavigation()
 
-	const addPublish = async () =>{
-        try{
-            const docRef = await addDoc(collection(getFirestore(),'publish'),{
-                title: title,
-				description:description,
-				lat:Number(lat),
-				long:Number(long),
-				label:label,
-                isActive: true,
-            })
-
-        }
-        catch(e){
-            console.error("ERROR ADDING DOCUMENT: ",e);
-        }
-    }
+	const goPublish = () =>{
+		navigation.navigate('CreatePublish')
+	}
+	
 	return <>
 	<SafeAreaView style={styles.container}>
 	<View style={styles.container}>

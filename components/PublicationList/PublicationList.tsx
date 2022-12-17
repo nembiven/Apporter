@@ -106,9 +106,11 @@ const styles = StyleSheet.create({
 	  borderRadius: 5,
 	  alignItems: 'center',
 	  padding: 8,
-	  textAlign: "left",
+	  textAlign: 'justify',
 	  elevation: 5,
 	  marginVertical: 10,
+	  overflow: 'hidden',
+	  paddingEnd: 60,
 	  
 	},
 	title: {
@@ -118,12 +120,12 @@ const styles = StyleSheet.create({
 	//   paddingBottom: 5,
 	  textAlign: "left",
 	},
-	description: {
-	  textAlign: "left",
+	description:{
 	//   margin: 5,
 	//   lineHeight: 20,
 	  fontSize: 14,
 	  color: "#4d4d4d",
+	  textAlign: 'justify',
 	},
 	// buttonContainer: {
 	//   display: "flex",

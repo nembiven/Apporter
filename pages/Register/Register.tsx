@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/core';
 const Register : React.FC<RegisterInterface> = () => {
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
+	const [password2, setPassword2] = React.useState('')
 	const auth = getAuth(app)
 	const navigation = useNavigation()
 
@@ -21,10 +22,21 @@ const Register : React.FC<RegisterInterface> = () => {
 		.then((userCredential )=>{
 			console.log("Account created!")
 			const user = userCredential.user;
+			Alert.alert('Cuenta Creada!')
+			movetoLogin()
 		})
 		.catch(error =>{
-			Alert.alert(error.message)
+			console.log(error.code)
+			Alert.alert('Error en el registro, intente nuevamente.')
 		})
+	}
+	const validate = ()=>{
+		if(password == password2){
+			handleCreateAccount()
+		}
+		else{
+			Alert.alert('Las contraseñas ingresadas no coinciden, intente nuevamente.')
+		}
 	}
 
 	return (
@@ -48,12 +60,12 @@ const Register : React.FC<RegisterInterface> = () => {
 					</View>
 					{/* Ingreso contraseña x2*/}
 					<View>
-						<TextInput secureTextEntry={true} onChangeText={(text)=> setPassword(text)} style={styles.label} placeholder="Repite contraseña"/>
+						<TextInput secureTextEntry={true} onChangeText={(text)=> setPassword2(text)} style={styles.label} placeholder="Repite contraseña"/>
 					</View>
 					{/* Submit Button */}
 					<View>		
 						<TouchableOpacity
-							onPress={handleCreateAccount}
+							onPress={validate}
 							style={styles.button}
 							activeOpacity={1}>
 							<Text style={styles.textButton}>Registrarse</Text>
@@ -107,7 +119,7 @@ const styles = StyleSheet.create({
 	textdetails:{ //Texto pequeño
 		color: '#4D4D4D',
 		backgroundColor: 'transparent',
-		fontSize: 12,
+		fontSize: 15,
 		textAlign: 'center',
 		margin: 10
 	},

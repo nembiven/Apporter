@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { StyleSheet, Text, View, Image, TextInput,Animated,TouchableOpacity , Alert} from 'react-native';
 import {BlurView} from 'expo-blur'
@@ -30,8 +29,7 @@ function Login (){
 			navigation.navigate('Navigation')
 		})
 		.catch(error =>{
-			
-			Alert.alert(error.message)
+			Alert.alert('Error en los datos ingresados, intente nuevamente.')
 		})
 	}
 	return (
@@ -54,9 +52,9 @@ function Login (){
 					<TextInput secureTextEntry={true} onChangeText={(text)=> setPassword(text)} style={styles.label} placeholder="Contraseña"/>
 				</View>
 				{/*Recuperar contraseña*/}
-				<TouchableOpacity onPress={F} style={{top:-10}}>
+				{/* <TouchableOpacity onPress={F} style={{top:-10}}>
 					<Text style={styles.textdetails}>¿Olvidaste tu contraseña?</Text>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 				{/*Submit Button*/}
 				<View>		
 					<TouchableOpacity
@@ -64,12 +62,6 @@ function Login (){
 						style={styles.button}
 						activeOpacity={1}>
 						<Text style={styles.textButton}>Iniciar Sesión Usuario</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={movetoApp}
-						style={styles.button}
-						activeOpacity={1}>
-						<Text style={styles.textButton}>Entrar app</Text>
 					</TouchableOpacity>
         		</View>
 			</View>
@@ -83,6 +75,12 @@ function Login (){
 				<Text style={styles.text}>Continuar con Google</Text>
 			</TouchableOpacity> */}
       	</View>
+		<TouchableOpacity
+			onPress={movetoApp}
+			// style={styles.button}
+			activeOpacity={1}>
+			<Text style={styles.textButton}>Entrar app</Text>
+		</TouchableOpacity>
 	</View>
 	
 	</>)
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
 	textdetails:{ //Texto pequeño
 		color: '#4D4D4D',
 		backgroundColor: 'transparent',
-		fontSize: 12,
+		fontSize: 15,
 		textAlign: 'center',
 		margin: 10
 	},
