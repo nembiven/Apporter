@@ -10,6 +10,7 @@ export interface Publish {
     phone:string,
     mail:string,
     adress:string,
+    date : Date,
     
 }
 

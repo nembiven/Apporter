@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Alert, Button, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { PublishContextType } from '../../context/types';
+import { PublishContextType } from '../../models';
 import PublicationContext from "../../context/PublContext"
+import * as Location from 'expo-location'
+import { useNavigation } from '@react-navigation/core';
 
 export interface MapInterface {}
 
@@ -27,8 +29,8 @@ const Map : React.FC<MapInterface> = () => {
 	const [longin,setlongin]=useState(-70.5970)
 
 	async  function  GetLocation () {
-		let { status } = await Location.requestPermissionsAsync();
-	
+		const { status } = await Location.requestForegroundPermissionsAsync();
+
 		if (status !== "granted") {
 		  Alert.alert(
 			"Permission not granted",
@@ -38,7 +40,7 @@ const Map : React.FC<MapInterface> = () => {
 		  );
 		}
 	
-		let { coords } = await Location.getCurrentPositionAsync();
+		const { coords } = await Location.getCurrentPositionAsync();
 	
 		if (coords) {
 		  const { latitude, longitude } = coords;
@@ -56,20 +58,32 @@ const Map : React.FC<MapInterface> = () => {
 		  }*/
 		}
 	  };
-
 	function Markers (){
+		const navigation = useNavigation()
 		GetLocation()
 		const markersx = [] as Array<any>
 		PublicationsContext.forEach(element  => {
-			
+
 			const mark = {
 				title : element.title,
 				coordinates:{
 					latitude : element.lat,
 					longitude: element.long,
 				},
-				description : element.description,
+				adress : element.adress,
+				entire : element,
+				label : element.label
 			}
+			if(element.label == "Ropa")
+				mark.label = require('../../assets/Ropa.png')
+			if(element.label == "Dinero")
+				mark.label = require('../../assets/Dinero.png')
+			if(element.label == "Comida")
+				mark.label = require('../../assets/Comida.png')
+			if(element.label == "Olla_comun")
+				mark.label = require('../../assets/Olla_comun.png')
+			if(element.label == "Juguetes")
+				mark.label = require('../../assets/Juguetes.png')
 			markersx.push(mark)
 		})
 		return (
@@ -77,9 +91,14 @@ const Map : React.FC<MapInterface> = () => {
 			{
 		markersx.map(marker => (
     	<Marker 
+			//image = {require('../../assets/'+'map'+'.png')}
+			icon = {marker.label}
+			key={marker.key}
       		coordinate={marker.coordinates}
       		title={marker.title}
-	  		description={marker.description}
+	  		description={marker.adress}
+			onCalloutPress={()=> navigation.navigate("Detalle",marker.entire)}
+			
     	/>))}
 			</>
 		)

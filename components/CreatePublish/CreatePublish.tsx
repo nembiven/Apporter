@@ -1,42 +1,51 @@
 import React from 'react';
-import { TouchableOpacity, Text, SafeAreaView, View, Pressable,TextInput, Button, Alert, StyleSheet, ScrollView  } from 'react-native';
+import { TouchableOpacity, Text, SafeAreaView, View, TextInput,  Alert, StyleSheet } from 'react-native';
 import {useState } from 'react';
 import {addDoc,collection, getFirestore } from 'firebase/firestore';
-import {Publish} from '../../models';
-import {Profile} from '../../pages';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import { useNavigation } from '@react-navigation/core';
+import SelectDropdown from 'react-native-select-dropdown'
+import { Auth, getAuth } from 'firebase/auth';
+import { app } from '../../services/Firebase/Firebase';
 export interface CreatePublishInterface {}
 
 const CreatePublish : React.FC<CreatePublishInterface> = () => {
+  const auth = getAuth(app)
 	const [title, setTitle] = useState("");
 	const [description, setdescription] = useState("");
 	const [lat, setlat] = useState("");
 	const [long, setlong] = useState("");
 	const [label, setlabel] = useState("");
   const [adress, setadress] = useState("");
-
+  const [phone, setphone] = useState("");
+  const [mail, setmail] = useState("");
+  const navigation = useNavigation()
 	const addPublish = async () =>{
-        try{
-            const docRef = await addDoc(collection(getFirestore(),'publish'),{
-              title: title,
-              description:description,
-              lat:Number(lat),
-              long:Number(long),
-              label:label,
-              isActive: true,
-            })
-            const navigation = useNavigation()
-            navigation.navigate('Navigation')
-	
-        }
-        catch(e){
-            console.error("ERROR ADDING DOCUMENT: ",e);
-        }
+    try{
+      const docRef = await addDoc(collection(getFirestore(),'publish'),{
+        idUser : auth.currentUser?.uid,
+        title: title,
+        description:description,
+        lat:Number(lat),
+        long:Number(long),
+        label:label,
+        date : new Date(),
+        adress:adress,
+        mail: mail,
+        phone:phone,
+      })
+      
+      navigation.navigate('Navigation')
+
+  }
+  catch(e){
+      console.error("ERROR ADDING DOCUMENT: ",e);
+  }
     }
 	return <>
 	<SafeAreaView style={styles.containerMain}>
-	<ScrollView>
+
+
     <View style={styles.container}>
       <Text style={styles.title}>Título:</Text>
       <TextInput
@@ -52,34 +61,78 @@ const CreatePublish : React.FC<CreatePublishInterface> = () => {
         multiline={true}
         onChangeText = {(text) => setdescription(text)}
       />
-	  	<Text style={styles.title}>Latitud:</Text>
+      <Text style={styles.title}>Telefono:</Text>
       <TextInput
-		    placeholder=''
+        placeholder=''
         style={styles.label}
-        onChangeText = {(text) => setlat(text)}
-      />
-	  	<Text style={styles.title}>Longitud:</Text>
-      <TextInput
-		    placeholder=''
-        style={styles.label}
-        onChangeText = {(text) => setlong(text)}
+        allowFontScaling
+        multiline={true}
+        onChangeText = {(text) => setphone(text)}
       />
 		  <Text style={styles.title}>Etiqueta:</Text>
-      <TextInput
-	      placeholder=''
-        style={styles.label}
-        onChangeText = {(text) => setlabel(text)}
-      />
+      <SelectDropdown
+	        data={['Comida','Dinero','Ropa','Olla_comun','Juguetes']}
+	        onSelect={(selectedItem, index) => {
+            setlabel(selectedItem)
+		    console.log(selectedItem, index)
+	}}
+	buttonTextAfterSelection={(selectedItem, index) => {
+		// text represented after item is selected
+		// if data array is an array of objects then return selectedItem.property to render after item is selected
+		return selectedItem
+	}}
+	rowTextForSelection={(item, index) => {
+		// text represented for each item in dropdown
+		// if data array is an array of objects then return item.property to represent item in dropdown
+		return item
+	}}
+/>
+       
+      <Text style={styles.title}>Dirección:</Text>
+      <View style={styles.autocomplete}>
+      <GooglePlacesAutocomplete styles={{
+    textInputContainer: {
+      backgroundColor: '#FFF3EB',
+    },
+    textInput: {
+      height: 38,
+      color: '#FFFFF',
+      fontSize: 16,
+    },
+ 
+  }}
+        GooglePlacesDetailsQuery={{ fields: "geometry" }}
+        fetchDetails={true} // you need this to fetch the details object onPress
+        placeholder="Search"
+        query={{
+          key: "AIzaSyDLxXazrr1YQSQCXOx5vRCMbYBkq3lY4uo",
+          components: 'country:cl',
+          language: "es", // language of the results
+        }}
+        onPress={(data: any, details: any = null) => {
+          setadress(data.description)
+          setlat(details.geometry.location.lat)
+          setlong(details.geometry.location.lng)
+
+        }}
+        onFail={(error) => Alert.alert(error)} />
+      </View>
+
+
       <View style={styles.cont}>
-        <TouchableOpacity
-          onPress={addPublish}
-          style={styles.button}
-          activeOpacity={1}>
-          <Text style={styles.textButton}>Publicar</Text>
-        </TouchableOpacity>
+        { 
+        	(title!="" && description!='' && lat!='' && long!='' && label!='' && adress!='') ?
+          (<TouchableOpacity
+            onPress={addPublish}
+            style={styles.button}
+            activeOpacity={1}>
+            <Text style={styles.textButton}>Publicar</Text>
+          </TouchableOpacity>):(<></>)
+        }
+        
       </View>
     </View>
-	</ScrollView>
+
 	</SafeAreaView>
 
 	</>
@@ -98,6 +151,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF3EB',
     borderRadius: 10,
 	},
+  autocomplete:{
+    maxHeight: 100,
+  },
   cont:{
     alignItems: 'center',
     justifyContent: 'center',
@@ -152,6 +208,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		margin: 10,
 	},
+
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -161,6 +218,7 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		margin: 10,
 	},
+
   });
 export default CreatePublish;
 

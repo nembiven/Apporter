@@ -13,6 +13,7 @@ export interface PublicationListInterface {}
 const PublicationList : React.FC<PublicationListInterface> = () => {
 	const navigation = useNavigation()
 	const PublicationsCard = (props:any) => { //Aqui se arregla el contenido de la lista de publicaciones
+
 		return (
 			<TouchableOpacity
 				onPress={() =>
@@ -26,8 +27,10 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 							resizeMode="contain"
 							/>
 						<View>
-							<Text style={styles.title}>{props.title}</Text>
-							<Text style={styles.description}>*{props.description}</Text>
+							<Text style={styles.title}>{props.title} - {props.label}</Text>
+							
+							<Text style={styles.description}>{props.adress}</Text>
+							
 						</View>
 						
 					</View>
@@ -56,6 +59,7 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 				phone : doc.data().phone,
 				mail : doc.data().mail,
 				adress: doc.data().adress,
+				date : doc.data().date,
 				
 			}
 
@@ -82,7 +86,7 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 		(
 		<FlatList
 			data={PublicationsContext} 
-			renderItem={({item}) =><PublicationsCard title={item.title}  id={item.id} description={item.description} lat={item.lat} long={item.long}/>} //Aqui se pasa la info hacia details
+			renderItem={({item}) =><PublicationsCard title={item.title}  id={item.id} description={item.description} lat={item.lat} date={item.date} long={item.long} label={item.label} adress={item.adress} phone={item.phone}/>} //Aqui se pasa la info hacia details
 			style={styles.mainContainer}
 
 		/>)

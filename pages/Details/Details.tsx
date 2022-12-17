@@ -4,17 +4,20 @@ export interface DetailsInterface {}
 
 const Details : React.FC<DetailsInterface> = (props) => {
 	const info = props.route.params
+
+	const fecha = info.date.toDate().toDateString()
 	return <>
 	<View style={styles.container}>
 		<View style={styles.containerInfo}>
 			<Text style={styles.title}>{info.title}</Text>
-			{/* <Text style={styles.description}> isActive: {info.isActive}</Text> */}
-			{/* <Text style={styles.subtitle}>Usuario: </Text>
-			<Text style={styles.description}>{info.username}</Text> */}
+			<Text style={styles.subtitle}>Dirección: </Text>
+			<Text style={styles.description}>{info.adress}</Text>
+			<Text style={styles.subtitle}>Telefono: </Text>
+			<Text style={styles.description}>{info.phone}</Text> 
 			<Text style={styles.subtitle}>Descripcion:</Text>
 			<Text style={styles.description}>{info.description}</Text>
-			{/* <Text style={styles.subtitle}>Fecha: </Text>
-			<Text style={styles.description}>{info.fecha}</Text> */}
+			<Text style={styles.subtitle}>Fecha: {fecha}</Text>
+			<Text style={styles.title}>Etiqueta : {info.label}</Text>
 		</View>
 	</View>
 	</>;
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		color: "#333333",
 		margin: 10,
+		fontWeight: 'bold',
 	},
 	subtitle:{
 		textAlign: 'justify',
