@@ -74,6 +74,7 @@ const Map : React.FC<MapInterface> = () => {
 				entire : element,
 				label : element.label
 			}
+			console.log(mark.label)
 			if(element.label == "Ropa")
 				mark.label = require('../../assets/Ropa.png')
 			if(element.label == "Dinero")
@@ -84,6 +85,7 @@ const Map : React.FC<MapInterface> = () => {
 				mark.label = require('../../assets/Olla_comun.png')
 			if(element.label == "Juguetes")
 				mark.label = require('../../assets/Juguetes.png')
+			
 			markersx.push(mark)
 		})
 		return (
