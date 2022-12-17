@@ -1,5 +1,3 @@
-
-
 import React, { useContext, useEffect , useState} from 'react';
 import { ActivityIndicator,Text, View, Image, TouchableOpacity , StyleSheet} from 'react-native';
 import { db,collection, getDocs, onSnapshot} from '../../services/Firebase/Firebase';
@@ -17,23 +15,24 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 	const PublicationsCard = (props:any) => { //Aqui se arregla el contenido de la lista de publicaciones
 		return (
 			<TouchableOpacity
-				  onPress={() =>
-					navigation.navigate("Details",props)}>
-			<View style={styles.mainContainer}>
-			<View style={styles.courseContainer}>
-			  <View>
-				<Image
-				//style={styles.cardImage}
-				  source={props.image}
-				  resizeMode="contain"
-				/>
-			  </View>
-	
-			  <Text style={styles.mainHeader}>{props.title}</Text>
-			  <Text style={styles.description}>*{props.description}</Text>
-			</View>
-		  </View>
-		  </TouchableOpacity>
+				onPress={() =>
+				navigation.navigate("Details",props)}>
+				<View style={styles.mainContainer}>
+					<View style={styles.card}>
+						<Image
+							style={styles.cardImage}
+							// source={props.image}
+							source={require('../../assets/map.png')}
+							resizeMode="contain"
+							/>
+						<View>
+							<Text style={styles.title}>{props.title}</Text>
+							<Text style={styles.description}>*{props.description}</Text>
+						</View>
+						
+					</View>
+		  		</View>
+		  	</TouchableOpacity>
 		);
 	  };
 
@@ -71,8 +70,6 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 		getPublishList()
 		
 	},[])
-
-
 	
 	if(loading){
 		return (
@@ -80,81 +77,74 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 		)
 	}
 	
-	return <>
-	
-		{
-			PublicationsContext.length>0? 
-			(
-			<FlatList
-				data={PublicationsContext} 
-				renderItem={({item}) =><PublicationsCard title={item.title}  id={item.id} description={item.description} lat={item.lat} long={item.long}/>} //Aqui se pasa la info hacia details
-				style={styles.mainContainer}
+	return <>{
+		PublicationsContext.length>0? 
+		(
+		<FlatList
+			data={PublicationsContext} 
+			renderItem={({item}) =><PublicationsCard title={item.title}  id={item.id} description={item.description} lat={item.lat} long={item.long}/>} //Aqui se pasa la info hacia details
+			style={styles.mainContainer}
 
-			/>)
-			:
-			(<Text>Nada que mostrar</Text>)
+		/>)
+		:
+		(<Text>Nada que mostrar</Text>)
 		}
-		
-
 	</>
 };
 const styles = StyleSheet.create({
-	cardImage: {
-	  width: "10%",
-	  
-	  aspectRatio: 1,
-	},
 	mainContainer: {
-	  paddingHorizontal: 5,
-
+		paddingHorizontal: 15,
+		backgroundColor: '#FFF3EB', //Blanco
 	},
-	courseContainer: {
-	  padding: 20,
-	  backgroundColor: "rgba(255, 255, 255, 0.90)",
-	  textAlign: "center",
+	cardImage: {
+	  width: 40,
+	  height:40,
+	},
+	card: {
+	  backgroundColor: "#F3AE5F", //Amarillo
+	  flexDirection: 'row',
 	  borderRadius: 5,
-	  shadowColor: "grey",
-	  shadowOffset: { width: 0, height: 0 },
-	  shadowOpacity: 0.5,
-	  shadowRadius: 8,
-	  elevation: 8,
+	  alignItems: 'center',
+	  padding: 8,
+	  textAlign: "left",
+	  elevation: 5,
 	  marginVertical: 10,
+	  
 	},
-	mainHeader: {
-	  fontSize: 18,
-	  color: "#344055",
+	title: {
+	  fontSize: 20,
+	  color: "#333333",
 	  textTransform: "uppercase",
-	  // fontWeight: 500,
-	  paddingBottom: 15,
-	  textAlign: "center",
+	//   paddingBottom: 5,
+	  textAlign: "left",
 	},
 	description: {
 	  textAlign: "left",
-	  paddingBottom: 15,
-	  lineHeight: 20,
-	  fontSize: 16,
-	  color: "#7d7d7d",
+	//   margin: 5,
+	//   lineHeight: 20,
+	  fontSize: 14,
+	  color: "#4d4d4d",
 	},
-	buttonContainer: {
-	  display: "flex",
-	  flexDirection: "row",
-	  justifyContent: "center",
-	},
-	buttonStyle: {
-	  backgroundColor: "#809fff",
-	  borderRadius: 5,
-	  paddingVertical: 10,
-	  paddingHorizontal: 20,
-	  display: "flex",
-	  justifyContent: "center",
-	  alignItems: "center",
-	},
-	buttonText: {
-	  fontSize: 20,
-	  color: "#eee",
-	  fontFamily: "JosefinSans_500Medium",
-	  textTransform: "capitalize",
-	},
+	// buttonContainer: {
+	//   display: "flex",
+	//   flexDirection: "row",
+	//   justifyContent: "center",
+	// },
+	// buttonStyle: {
+	//   backgroundColor: "#809fff",
+	//   borderRadius: 5,
+	//   paddingVertical: 10,
+	//   paddingHorizontal: 20,
+	//   display: "flex",
+	//   justifyContent: "center",
+	//   alignItems: "center",
+	// },
+	// buttonText: {
+	//   fontSize: 20,
+	//   color: "#eee",
+	//   fontFamily: "JosefinSans_500Medium",
+	//   textTransform: "capitalize",
+	// },
   });
 
 export default PublicationList;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, SafeAreaView, View, Pressable,TextInput, Button, Alert, StyleSheet, ScrollView  } from 'react-native';
+import { Text, SafeAreaView, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import {addDoc,getDocs,collection, getFirestore } from 'firebase/firestore';
 
@@ -32,101 +32,61 @@ const Profile : React.FC<ProfileInterface> = () => {
         }
     }
 	return <>
-	<SafeAreaView>
-	<ScrollView><View style={styles.title}>
-      <Text>Título:</Text>
-      <TextInput
-        placeholder=' Enter titulo'
-		style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        onChangeText = {(text) => setTitle(text)}
-	  />
-	  
-	  <Text>Descripción:</Text>
-      <TextInput
-		placeholder=' Enter descripción'
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        onChangeText = {(text) => setdescription(text)}
-      />
-	  	  <Text>Latitud:</Text>
-      <TextInput
-		placeholder=' Enter latitud'
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        onChangeText = {(text) => setlat(text)}
-      />
-	  	  <Text>Longitud:</Text>
-      <TextInput
-		placeholder=' Enter longitud'
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        onChangeText = {(text) => setlong(text)}
-      />
-		<Text>Etiqueta:</Text>
-      <TextInput
-	  placeholder=' Enter etiqueta'
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        onChangeText = {(text) => setlabel(text)}
-      />
-
-    </View>
-
-	<View style={styles.fixToText}>
-
-	<Button 
-          title="Publicar"
-          onPress={() => addPublish()}
-        />
-
+	<SafeAreaView style={styles.container}>
+	<View style={styles.container}>
+		<Text style={styles.title}>Mis Publicaciones</Text>
+		<TouchableOpacity
+			onPress={goPublish}
+			// style={styles.button}
+			activeOpacity={1}>
+			<Image source={require('../../assets/plus.png')} style={styles.imageIcon} />
+		</TouchableOpacity>
 	</View>
-	</ScrollView>
 	</SafeAreaView>
 	</>
 };
 
 const styles = StyleSheet.create({
-	input: {
-	  height: 40,
-	  margin: 12,
-	  borderWidth: 1,
-	  padding: 10,
+	container:{
+		flex: 1,
+		backgroundColor:'#FFF3EB',
+		alignItems : 'center',
+		justifyContent : 'flex-start',
 	},
-	container: {
-	  flex: 1,
-	  justifyContent: 'center',
-	  marginHorizontal: 16,
+	title:{
+		color: '#333333',
+		backgroundColor: 'transparent',
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 20,
 	},
-	title: {
-	  textAlign: 'center',
-	  marginVertical: 20,
-	  marginHorizontal: 10,
+	text:{
+		color: '#333333',
+		backgroundColor: 'transparent',
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 20
 	},
-	fixToText: {
-	  flexDirection: 'row',
-	  justifyContent: 'space-between',
+	button: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#0B87BA',
+		height: 50,
+		width: 200,
+		borderRadius: 15,
+		margin: 10,
 	},
-	separator: {
-	  marginVertical: 8,
-	  borderBottomColor: '#737373',
-	  borderBottomWidth: StyleSheet.hairlineWidth,
+	textButton:{
+		color: '#FFF3EB',
+		backgroundColor: 'transparent',
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
 	},
-  });
+	imageIcon: {
+		width: 40,
+		height: 40,
+	},
+});
 
 export default Profile;

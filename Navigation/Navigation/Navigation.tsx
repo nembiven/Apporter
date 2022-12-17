@@ -2,8 +2,8 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { PubliContextProvider } from '../../context/PublContext';
 //Pages
-import { MainView} from '../../pages';
-import { Menu } from '../Menu';
+import { MainView, Menu} from '../../pages';
+import { ImageBackground, ImageComponent } from 'react-native';
 
 export interface NavigationInterface {}
 
@@ -12,9 +12,14 @@ const Tab = createBottomTabNavigator();
 function Navbar(){
 	return (
 		<PubliContextProvider>
-			<Tab.Navigator
-			initialRouteName="MainView"
-		>
+			<Tab.Navigator 
+				initialRouteName="MainView"
+				screenOptions={{
+					headerStyle: {backgroundColor: '#F3AE5F'},
+					tabBarStyle: {backgroundColor: '#F3AE5F'},
+					
+				}}
+			>
 			<Tab.Screen 
 				name="MainView" 
 				component={MainView}
