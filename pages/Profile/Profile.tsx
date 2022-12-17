@@ -13,7 +13,7 @@ const Profile : React.FC<ProfileInterface> = () => {
 	const navigation = useNavigation()
 
 	const goPublish = () =>{
-		navigation.navigate('CreatePublish')
+		navigation.navigate('Publicacion')
 	}
 	
 	return <>

@@ -16,7 +16,7 @@ const PublicationList : React.FC<PublicationListInterface> = () => {
 		return (
 			<TouchableOpacity
 				onPress={() =>
-				navigation.navigate("Details",props)}>
+				navigation.navigate("Detalle",props)}>
 				<View style={styles.mainContainer}>
 					<View style={styles.card}>
 						<Image
